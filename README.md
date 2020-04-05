@@ -23,8 +23,6 @@ This contains code meant to be used with [roam-backup](https://github.com/chrono
 4. Create a new model in Anki called `ClozeUID` with 3 fields: `{ Text: text, Extra: extra, UID: uid }`. Easiest way is to clone the existing `Cloze` model and add a `UID` field. This field is used for idempotency.
 5. AnkiConnect should be available on `http://127.0.0.1:8765`.
 
-## Usage
-
 This program expects some Node environment variables to be present. To provide them, create a `.env` file following the example below:
 
 ```
@@ -35,6 +33,17 @@ ANKI_CONNECT_URL="http://127.0.0.1:8765"
 ```
 
 `GCS_SERVICEACCOUNT_KEYFILE` can be omitted if using application default credentials.
+
+## Usage
+In Roam, a modified Anki cloze syntax is provided. Example:
+```
+- this is {c1::another} {c2::flashcard} {c3::haha}. #flashcard {uid:20200405151338}.
+```
+
+The necessary components are:
+1. `#flashcard` or `[[flashcard]]` tag
+2. cloze deletion(s) in the above format
+3. unique id in `{uid:something}` format, for idempotency. I usually use a timestamp generated via text expansion.
 
 `npm start` will do a one-time sync from Roam to Anki.
 
