@@ -3,9 +3,9 @@ const { RipGrep } = require("ripgrep-node");
 
 // Using `flashcard` as the roam tag to extract blocks for.
 const tagRegexpForFlashcards = /#(flashcard|\\[\\[flashcard\\]\\])/g;
-const tagRegexpForRgFlashcards = `^.*#(flashcard|\\[\\[flashcard\\]\\]).*$`;
+const tagRegexpForRgFlashcards = `^.*\s*#(flashcard|\\[\\[flashcard\\]\\])\s*.*$`;
 const uidRegexpI = /{\s*uid:\s*(\d*)\s*}/i;
-const uidRegexpGI = /{\s*uid:\s*(\d*)\s*}/gi;
+const uidRegexpGI = /\s*{\s*uid:\s*(\d*)\s*}\s*/gi;
 const clozeMatchRegexp = /{\s*c\d*::[^{}]*\s*}/gi;
 const firstDashRegexp = /^\s*-/;
 
@@ -18,20 +18,26 @@ const firstDashRegexp = /^\s*-/;
 //   It is necessary because the membership in [[AD Groups]] is updated when a {c1:: [[Kerberos]] ticket} is created,
 //   which happens during the system boot and user login. #flashcard {uid: 20200405111533}
 
-const findMatchingRoamBlocks = async function () {
+const findAllMatchingLines = function (dir) {
+  const rg = new RipGrep(tagRegexpForRgFlashcards, dir);
+  const matches = rg.json().run().asObject();
+  return matches.map((x) => x.data.lines.text);
+};
+
+const findMatchingRoamBlocks = function (dir) {
   console.log("findMatchingRoamBlocks");
-  const rg = new RipGrep(tagRegexpForRgFlashcards, "./temp");
-  const matches = await rg.json().run().asObject();
-  const lines = matches.map((x) => x.data.lines.text);
+  const lines = findAllMatchingLines(dir);
+  console.log(lines);
   var cardObjs = lines.map((l) => blockToClozeUID(l));
   var seen = new Set();
   // Remove dups early, reduce # calls to Anki.
   // Dups can also appear due to roam block references.
   cardObjs = cardObjs.filter(function (c) {
-    if (seen.has(c.uid)) {
+    if (seen.has(c.UID)) {
+      console.log(`duplicate ${c.UID}`);
       return false;
     } else {
-      seen.add(c.uid);
+      seen.add(c.UID);
       return true;
     }
   });
@@ -53,10 +59,12 @@ const blockToClozeUID = function (block = "") {
     .replace(tagRegexpForFlashcards, "")
     .replace(uidRegexpGI, "")
     .trim();
-  // console.log(cleanBlockTxt)
-  return { Text: cleanBlockTxt, Extra: "", UID: uid };
+  const resp = { Text: cleanBlockTxt, Extra: "", UID: uid };
+  console.log(resp);
+  return resp;
 };
 
 module.exports = {
   findMatchingRoamBlocks: findMatchingRoamBlocks,
+  blockToClozeUID: blockToClozeUID,
 };

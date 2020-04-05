@@ -8,6 +8,7 @@ const path = require("path");
 const { Storage } = require("@google-cloud/storage");
 const anki = require("./anki.js");
 const parse = require("./parse.js");
+const tempDir = "./test-data";
 
 const listBucket = async function () {
   var storage = new Storage();
@@ -25,12 +26,12 @@ const listBucket = async function () {
   const f = await data[0].reduce(getLatestFile);
   console.log(f.metadata.name);
   await f.download({ destination: "./latest.zip" });
-  await fs.mkdir("./temp", (err) => {
+  await fs.mkdir(tempDir, (err) => {
     if (err) console.log(err);
   });
   return fs
     .createReadStream("./latest.zip")
-    .pipe(unzipper.Extract({ path: "./temp" }))
+    .pipe(unzipper.Extract({ path: "tempDir" }))
     .promise();
 };
 
@@ -46,8 +47,8 @@ const getLatestFile = (latestFile, currentFile) => {
 
 const main = async function () {
   try {
-    await listBucket();
-    const blocks = await parse.findMatchingRoamBlocks();
+    // await listBucket();
+    const blocks = parse.findMatchingRoamBlocks(tempDir);
     console.log(blocks);
     for (const b of blocks) {
       console.log(b);
