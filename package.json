@@ -1,0 +1,41 @@
+{
+  "name": "roam-sync",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "rimraf *.zip && rimraf *.png && rimraf temp && node index.js",
+    "pretest": "prettier --write --ignore-path .gitignore . ",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chronologos/roam-to-anki.git"
+  },
+  "keywords": [
+    "anki",
+    "roam",
+    "sync",
+    "gcs"
+  ],
+  "author": "chronologos",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/chronologos/roam-to-anki/issues"
+  },
+  "homepage": "https://github.com/chronologos/roam-to-anki#readme",
+  "dependencies": {
+    "@google-cloud/storage": "^4.7.0",
+    "dotenv": "^8.2.0",
+    "needle": "^2.4.1",
+    "rimraf": "^3.0.2",
+    "ripgrep-node": "^1.0.0",
+    "unzipper": "^0.10.10"
+  },
+  "devDependencies": {
+    "eslint": "^6.8.0",
+    "eslint-config-strongloop": "^2.1.0",
+    "prettier": "2.0.2",
+    "prettier-eslint": "^9.0.1"
+  }
+}
