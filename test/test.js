@@ -13,7 +13,7 @@ describe("findMatchingRoamBlocks()", function () {
         UID: "20200405151328",
       },
       {
-        Text: "this is {{c1::another}} {{c2::flashcard}} haha..",
+        Text: "this is {{c1::another}} {{c2::flashcard}} {{c3::haha}}..",
         Extra: "",
         UID: "20200405151338",
       },

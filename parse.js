@@ -25,9 +25,9 @@ const findAllMatchingLines = function (dir) {
 };
 
 const findMatchingRoamBlocks = function (dir) {
-  console.log("findMatchingRoamBlocks");
+  // console.log("findMatchingRoamBlocks");
   const lines = findAllMatchingLines(dir);
-  console.log(lines);
+  // console.log(lines);
   var cardObjs = lines.map((l) => blockToClozeUID(l));
   var seen = new Set();
   // Remove dups early, reduce # calls to Anki.
@@ -60,7 +60,7 @@ const blockToClozeUID = function (block = "") {
     .replace(uidRegexpGI, "")
     .trim();
   const resp = { Text: cleanBlockTxt, Extra: "", UID: uid };
-  console.log(resp);
+  // console.log(resp);
   return resp;
 };
 

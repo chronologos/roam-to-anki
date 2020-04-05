@@ -49,7 +49,7 @@ const main = async function () {
   try {
     // await listBucket();
     const blocks = parse.findMatchingRoamBlocks(tempDir);
-    console.log(blocks);
+    // console.log(blocks);
     for (const b of blocks) {
       console.log(b);
       anki.addUIDCloze(b);
