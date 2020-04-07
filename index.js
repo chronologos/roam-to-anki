@@ -8,7 +8,7 @@ const path = require("path");
 const { Storage } = require("@google-cloud/storage");
 const anki = require("./anki.js");
 const parse = require("./parse.js");
-const tempDir = "./test-data";
+const tempDir = "./temp";
 
 const listBucket = async function () {
   var storage = new Storage();
@@ -23,16 +23,14 @@ const listBucket = async function () {
   }
   const bucket = storage.bucket(process.env.GCS_BUCKET_NAME);
   const data = await bucket.getFiles();
-  const f = await data[0].reduce(getLatestFile);
-  console.log(f.metadata.name);
+  const f = data[0].reduce(getLatestFile)
   await f.download({ destination: "./latest.zip" });
   await fs.mkdir(tempDir, (err) => {
     if (err) console.log(err);
   });
-  return fs
-    .createReadStream("./latest.zip")
-    .pipe(unzipper.Extract({ path: "tempDir" }))
-    .promise();
+  return unzipper.Open.file("./latest.zip").then(function (d) { 
+    return d.extract({ path: path.join(__dirname, 'temp'), concurrency: 10 }); 
+  }).catch(err=>console.log(err));
 };
 
 const getLatestFile = (latestFile, currentFile) => {
@@ -47,9 +45,8 @@ const getLatestFile = (latestFile, currentFile) => {
 
 const main = async function () {
   try {
-    // await listBucket();
+    await listBucket().then(d=>console.log(d));
     const blocks = parse.findMatchingRoamBlocks(tempDir);
-    // console.log(blocks);
     for (const b of blocks) {
       console.log(b);
       anki.addUIDCloze(b);

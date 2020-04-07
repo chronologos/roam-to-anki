@@ -35,12 +35,15 @@ ANKI_CONNECT_URL="http://127.0.0.1:8765"
 `GCS_SERVICEACCOUNT_KEYFILE` can be omitted if using application default credentials.
 
 ## Usage
+
 In Roam, a modified Anki cloze syntax is provided. Example:
+
 ```
 - this is {c1::another} {c2::flashcard} {c3::haha}. #flashcard {uid:20200405151338}.
 ```
 
 The necessary components are:
+
 1. `#flashcard` or `[[flashcard]]` tag
 2. cloze deletion(s) in the above format
 3. unique id in `{uid:something}` format, for idempotency. I usually use a timestamp generated via text expansion.

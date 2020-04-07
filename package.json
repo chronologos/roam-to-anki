@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "rimraf *.zip && rimraf *.png && rimraf temp && node index.js",
+    "start": "rimraf *.zip && rimraf *.png && rimraf temp && rimraf latest.zip && node index.js",
     "pretest": "prettier --write --ignore-path .gitignore . ",
     "test": "mocha"
   },
