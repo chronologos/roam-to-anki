@@ -11,8 +11,8 @@ This contains code meant to be used with [roam-backup](https://github.com/chrono
 - Unit tests (hey that's a feature for small hacked together projects right?)
 
 ## Known Bugs / Feature Requests:
-
 - A note will not sync if it changes in Roam Research in a way that requires the user to manually run tools->empty cards in Anki (e.g. removing a cloze field). Workaround is to do just that and run the tool again.
+- See issues tab for more.
 
 ## Requirements
 
@@ -45,10 +45,12 @@ In Roam, a modified Anki cloze syntax is provided. Example:
 The necessary components are:
 
 1. `#flashcard` or `[[flashcard]]` tag
-2. cloze deletion(s) in the above format
+2. cloze deletion(s) in the above format (note double colon).
 3. unique id in `{uid:something}` format, for idempotency. I usually use a timestamp generated via text expansion.
 
-`npm start` will do a one-time sync from Roam to Anki.
+*Everything must be on a single line.*
+
+`npm start` will run a one-time sync from Roam to Anki. To make this run automatically, use your OS automation system of choice e.g. cron.
 
 ## Authenticating to GCS
 
