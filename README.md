@@ -11,6 +11,7 @@ This contains code meant to be used with [roam-backup](https://github.com/chrono
 - Unit tests (hey that's a feature for small hacked together projects right?)
 
 ## Known Bugs / Feature Requests:
+
 - A note will not sync if it changes in Roam Research in a way that requires the user to manually run tools->empty cards in Anki (e.g. removing a cloze field). Workaround is to do just that and run the tool again.
 - See issues tab for more.
 
@@ -39,7 +40,7 @@ ANKI_CONNECT_URL="http://127.0.0.1:8765"
 In Roam, a modified Anki cloze syntax is provided. Example:
 
 ```
-- this is {c1::another} {c2::flashcard} {c3::haha}. #flashcard {uid:20200405151338}.
+- this is {c1:another} {c2:flashcard} {c3:haha}. #flashcard {uid:20200405151338}.
 ```
 
 The necessary components are:
@@ -48,7 +49,7 @@ The necessary components are:
 2. cloze deletion(s) in the above format (note double colon).
 3. unique id in `{uid:something}` format, for idempotency. I usually use a timestamp generated via text expansion.
 
-*Everything must be on a single line.*
+_Everything must be on a single line._
 
 `npm start` will run a one-time sync from Roam to Anki. To make this run automatically, use your OS automation system of choice e.g. cron.
 

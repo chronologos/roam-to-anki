@@ -6,7 +6,7 @@ const tagRegexpForFlashcards = /#(flashcard|\\[\\[flashcard\\]\\])/g;
 const tagRegexpForRgFlashcards = `^.*\s*#(flashcard|\\[\\[flashcard\\]\\])\s*.*$`;
 const uidRegexpI = /{\s*uid:\s*(\d*)\s*}/i;
 const uidRegexpGI = /\s*{\s*uid:\s*(\d*)\s*}\s*/gi;
-const clozeMatchRegexp = /{\s*c\d*::[^{}]*\s*}/gi;
+const clozeMatchRegexp = /{\s*c(\d*):\s*([^:{}]*?)\s*}/gi;
 const firstDashRegexp = /^\s*-/;
 
 // This file contains functions that parse a roam markdown block based on a set of assumptions.
@@ -54,7 +54,7 @@ const blockToClozeUID = function (block = "") {
   // TODO: parse out additional tags.
   // TODO: idempotent updates
   const cleanBlockTxt = block
-    .replace(clozeMatchRegexp, "{$&}")
+    .replace(clozeMatchRegexp, "{{c$1::$2}}")
     .replace(firstDashRegexp, "")
     .replace(tagRegexpForFlashcards, "")
     .replace(uidRegexpGI, "")

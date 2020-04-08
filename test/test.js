@@ -37,7 +37,7 @@ describe("blockToClozeUID()", function () {
     };
 
     var testBlock =
-      "- this is {c1::a} {c2::flashcard} #flashcard {uid:20200405151328}.";
+      "- this is {c1:a} {c2:flashcard} #flashcard {uid:20200405151328}.";
 
     // 2. ACT
     var gotObject = parse.blockToClozeUID(testBlock);

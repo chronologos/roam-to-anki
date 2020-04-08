@@ -1,3 +1,3 @@
 - hello
-- this is {c1::a} {c2::flashcard} #flashcard {uid:20200405151328}.
-- this is {c1::another} {c2::flashcard} {c3::haha}. #flashcard {uid:20200405151338}.
+- this is {c1:a} {c2: flashcard} #flashcard {uid:20200405151328 }.
+- this is {c1:another} { c2: flashcard } {c3:haha }. #flashcard { uid:20200405151338}.
