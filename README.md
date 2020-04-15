@@ -54,6 +54,7 @@ _Everything must be on a single line._
 `npm start` will run a one-time sync from Roam to Anki. To make this run automatically, use your OS automation system of choice e.g. cron.
 
 ### Organizing your cards
+
 Once cards are synced, changes are pulled one way from roam to anki. The note fields will be overwritten in Anki if they have been changed there. Any tags on the note in Anki will be preserved.
 
 An easy way to organize automatically synced cards is to filter by the `ClozeUID` model and tag to your heart's content.

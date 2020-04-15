@@ -40,15 +40,17 @@ const findNoteByUID = async function (uid) {
     query: `UID:${uid}`,
   };
 
-  return callAnkiConnect(action, version, params).then(function (resp) {
-    if (resp["result"] && resp["result"].length == 0) {
-      return undefined;
-    }
-    const cardID = resp.result[0];
-    return cardID;
-  }).catch(function (err){
-    console.log(`error; ${err}`);
-  });
+  return callAnkiConnect(action, version, params)
+    .then(function (resp) {
+      if (resp["result"] && resp["result"].length == 0) {
+        return undefined;
+      }
+      const cardID = resp.result[0];
+      return cardID;
+    })
+    .catch(function (err) {
+      console.log(`error; ${err}`);
+    });
 };
 
 const addNote = async function (deckName, modelName, fields = {}, tags = []) {
@@ -98,8 +100,8 @@ const addUIDCloze = async function (fields, tags = []) {
 };
 
 const sync = async function () {
-  callAnkiConnect("sync", 6)
-}
+  callAnkiConnect("sync", 6);
+};
 
 module.exports = {
   addNote: addNote,
