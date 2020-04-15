@@ -46,6 +46,8 @@ const findNoteByUID = async function (uid) {
     }
     const cardID = resp.result[0];
     return cardID;
+  }).catch(function (err){
+    console.log(`error; ${err}`);
   });
 };
 
@@ -95,7 +97,12 @@ const addUIDCloze = async function (fields, tags = []) {
   );
 };
 
+const sync = async function () {
+  callAnkiConnect("sync", 6)
+}
+
 module.exports = {
   addNote: addNote,
   addUIDCloze: addUIDCloze,
+  sync: sync,
 };

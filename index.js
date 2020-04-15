@@ -47,11 +47,12 @@ const getLatestFile = (latestFile, currentFile) => {
 
 const main = async function () {
   try {
+    await anki.sync();
     await listBucket().then((d) => console.log(d));
     const blocks = parse.findMatchingRoamBlocks(tempDir);
     for (const b of blocks) {
       console.log(b);
-      anki.addUIDCloze(b);
+      await anki.addUIDCloze(b);
     }
   } catch (err) {
     console.log(err);
