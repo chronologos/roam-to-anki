@@ -1,5 +1,8 @@
 # [[`Roam -> Anki Sync`]]
 
+Version 2 of this project is in active development here: [Fabricus](https://github.com/chronologos/Fabricius).
+It supports bidirectional sync and is implemented as an Anki plugin.
+
 ## Summary
 
 This contains code meant to be used with [roam-backup](https://github.com/chronologos/roam-backup) and [Anki](https://ankiweb.net/). `roam-backup` saves your Roam Research into Google Cloud Storage. `Roam -> Anki Sync` reads from Google Cloud Storage and extracts any flashcards you defined into Anki.
