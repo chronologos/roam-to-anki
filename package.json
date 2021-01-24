@@ -25,7 +25,7 @@
   },
   "homepage": "https://github.com/chronologos/roam-to-anki#readme",
   "dependencies": {
-    "@google-cloud/storage": "^4.7.0",
+    "@google-cloud/storage": "^5.7.2",
     "dotenv": "^8.2.0",
     "needle": "^2.4.1",
     "rimraf": "^3.0.2",
