@@ -1,6 +1,7 @@
-# [[`Roam -> Anki Sync`]]
+# [[`Roam -> Anki Sync`]] (deprecated)
 
 -- deprecated --
+
 **Version 2 of this project is in active development here: [Fabricus](https://github.com/chronologos/Fabricius).**
 It supports bidirectional sync and is implemented as an Anki plugin.
 
